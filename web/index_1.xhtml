@@ -1,0 +1,63 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      style="background-color: black">
+    <h:head>
+        <title>Wiser Alignment</title>
+        <script name="jquery/jquery.js" library="primefaces"></script>
+    </h:head>
+
+    <h1 style="text-align: center;color: red">Wiser Alignment Ontology Tool</h1>
+
+    <h:form>
+        <p:growl id="msgs" showDetail="true" />
+
+        <p:panel header="Select Iot Ontology" style="margin-top: -20px; width: 308px;height: 580px;">
+            <h:panelGrid columns="2" cellpadding="5">
+                <p:outputLabel for="Classes" value="Classes:" />
+                <br/>
+                <p:selectManyMenu id="Classes" value="#{consultaClassPropIotOntology.varia}" style="width:250px">
+                    <f:selectItems value="#{consultaClassPropIotOntology.varia}" var="cla"
+                                   itemValue="#{cla}" itemLabel="#{cla.classes}" />
+                </p:selectManyMenu>
+                <br />
+                <p:outputLabel for="Propriedades" value="Propriedades:" />
+                <br/>
+                <p:selectManyMenu id="Propriedades" value="#{consultaClassPropIotOntology.variaveises}" style="width:250px">
+                    <f:selectItems value="#{consultaClassPropIotOntology.variaveises}" var="item"
+                                   itemValue="#{item}" itemLabel="#{item.subject}" />
+                </p:selectManyMenu>
+                <br/>
+            </h:panelGrid>
+        </p:panel>
+        <p:panel header="Select Web Ontology" style="margin-top: -589px;width: 308px;height: 580px; margin-left: 318px">
+            <h:panelGrid columns="2" cellpadding="5">
+
+                <p:outputLabel for="ontologia" value="Ontologia: " />
+                <br/>
+                <p:selectOneMenu id="ontologia" value="#{consultaOntoWeb.ontology}" style="width:250px">
+                    <p:ajax listener="#{consultaOntoWeb.onCountryChange}" update="classes2" />
+                    <f:selectItem itemLabel="Select Ontology" itemValue="" noSelectionOption="true" />
+                    <f:selectItems value="#{consultaOntoWeb.ontologies}" />
+                </p:selectOneMenu>
+                <br/>
+                <p:outputLabel for="classes2" value="Classes: " />
+                <br/>
+                <p:selectManyMenu id="classes2" value="#{consultaOntoWeb.classes}" style="width:250px ">
+                    <f:selectItem itemLabel="Select Classes" itemValue="" noSelectionOption="true" />
+                    <f:selectItems value="#{consultaOntoWeb.classess}" />
+                </p:selectManyMenu>
+            </h:panelGrid>
+
+            <!--<p:separator />-->
+
+            <p:commandButton style="visibility: hidden" value="Submit" update="msgs"
+                             actionListener="#{consultaOntoWeb.displayLocation}" icon="ui-icon-check" />
+        </p:panel>
+        <p:panel header="Alignment" style="margin-top: -589px;width: 680px;height: 580px; margin-left: 636px">
+            //Place Alignment
+        </p:panel>
+    </h:form>
+</html>

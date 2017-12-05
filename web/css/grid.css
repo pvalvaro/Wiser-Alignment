@@ -1,0 +1,75 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/*
+    Created on : 13/11/2017, 13:27:51
+    Author     : diangazo
+*/
+
+* { margin:0;padding:0; }
+
+/*html {
+    background: url(http://i.imgur.com/HfjbG.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}*/
+
+body {
+    margin: 10px;
+}
+
+.box {
+    background: #E8E8E8;
+    border-radius: 8px;
+    padding: 10px;
+    -moz-box-shadow: 0 0 30px black;
+    -webkit-box-shadow: 0 0 30px black;
+    box-shadow: 0 0 30px black;
+    font-family: Georgia;
+}
+
+.orange-heading {
+    color: #A2600A;
+    font-size: 40px;
+}
+
+#middle-box {
+    margin-top: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    /*        width: 1000px;
+            height: 620px;*/
+    padding: 0px;
+}
+
+#iot_onto-box {
+    width: 350px;
+    height: 442px;
+    margin: 6px;
+    display: inline-block;
+}
+
+#web_onto-box {
+    width: 350px;
+    height: 442px;
+    margin: 6px;
+    display: inline-block;
+}
+#alignment_onto-box {
+    width: 500px;
+    height: 442px;
+    margin: 6px;
+    display: inline-block;
+}
+/*#attendees-box {
+    width: 640px;
+    height: 142px;
+}*/
+
+#middle-box .box .orange-heading {
+    text-align: center;
+}
