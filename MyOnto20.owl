@@ -11,10 +11,46 @@
     <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
     <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
     <Declaration>
+        <Class IRI="ABS"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="AccRrcConnSetupSuccRate"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="AccS1SigEstabSuccRate"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Device"/>
+    </Declaration>
+    <Declaration>
         <Class IRI="Point"/>
     </Declaration>
     <Declaration>
+        <Class IRI="Service"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Thing"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="ThingProperty"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Transportation"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="exposedBy"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="exposes"/>
+    </Declaration>
+    <Declaration>
         <ObjectProperty IRI="hasAttribute"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasCoverage"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasMetadata"/>
     </Declaration>
 </Ontology>
 

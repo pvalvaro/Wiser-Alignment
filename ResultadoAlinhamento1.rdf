@@ -27,10 +27,26 @@
   </onto2>
   <map>
     <Cell>
+      <entity1 rdf:resource='http://purl.org/iot/ontology/fiesta-iot#Thing'/>
+      <entity2 rdf:resource='http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing'/>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7941176470588236</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
       <entity1 rdf:resource='http://purl.org/iot/ontology/fiesta-iot#Point'/>
       <entity2 rdf:resource='http://www.w3.org/2003/01/geo/wgs84_pos#Point'/>
       <relation>=</relation>
       <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://purl.org/iot/ontology/fiesta-iot#ThingProperty'/>
+      <entity2 rdf:resource='http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing'/>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.5082191780821917</measure>
     </Cell>
   </map>
 </Alignment>
