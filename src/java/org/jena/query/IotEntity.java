@@ -41,6 +41,9 @@ import org.semanticweb.owlapi.model.OWLOntologyRenameException;
 import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 import org.semanticweb.owlapi.model.UnknownOWLOntologyException;
 
+//Classes importadas
+import alignment.AlignmentResult;
+
 //outros metodos
 @ManagedBean
 @ViewScoped
@@ -54,12 +57,13 @@ public class IotEntity implements Serializable {
     List<String> selectedValue;
     List<String> selectedValue_pro;
 
+    //AlignmentResult OntologySelected = new AlignmentResult();
     public List<String> getNameOntologyIoT() {
         HashMap<String, String> IoTontology = new HashMap<>();
 
         IoTontology.put("Fiesta-IoT", "Fiesta-IoT");
-        IoTontology.put("DBpedia", "DBpedia");
-        IoTontology.put("Schema", "Schema");
+        IoTontology.put("M3-lite", "M3-lite");
+        IoTontology.put("SSN", "SSN");
 
         //conversao de hashmap para arraylist
         List<String> nameOntologyWeb = new ArrayList<>();
@@ -157,11 +161,11 @@ public class IotEntity implements Serializable {
             retorno = getVaria();
             result = getListProp();
         } else {
-            if (selected.equals("Schema")) {
+            if (selected.equals("SSN")) {
                 result = getOnt4();
                 retorno = getOnt5();
             } else {
-                if (selected.equals("DBpedia")) {
+                if (selected.equals("M3-lite")) {
                     result = getOnt5();
                     retorno = getOnt4();
                 } else {
@@ -170,6 +174,7 @@ public class IotEntity implements Serializable {
                 }
             }
         }
+
     }
 
     //retorno do valor setado

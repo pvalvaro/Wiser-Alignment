@@ -40,15 +40,15 @@ import fr.inrialpes.exmo.align.impl.renderer.RDFRendererVisitor;
 import java.io.PrintWriter;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -62,14 +62,84 @@ import javax.faces.bean.ManagedBean;
 @ManagedBean
 public class MyAlign {
 
-    public void alinhar() {
+    private String selectedIotOntology;
+    private String selectedWebOntology;
+
+    URI file3 = null;
+    URI file2 = null;
+
+    public List<String> getNameOntologyIoT() {
+        HashMap<String, String> IoTontology = new HashMap<>();
+
+        IoTontology.put("Fiesta-IoT", "Fiesta-IoT");
+        IoTontology.put("M3-lite", "M3-lite");
+        IoTontology.put("SSN", "SSN");
+
+        //conversao de hashmap para arraylist
+        List<String> nameOntologyWeb = new ArrayList<>();
+        for (String s : IoTontology.values()) {
+            nameOntologyWeb.add(s);
+        }
+        return nameOntologyWeb;
+    }
+
+    public List<String> getNameOntologyWeb() {
+        HashMap<String, String> ontologies = new HashMap<>();
+
+        ontologies.put("Geonames", "Geonames");
+        ontologies.put("DBpedia", "DBpedia");
+        ontologies.put("Schema", "Schema");
+
+        //conversao de hashmap para arraylist
+        List<String> nameOntologyWeb = new ArrayList<>();
+        for (String s : ontologies.values()) {
+            nameOntologyWeb.add(s);
+        }
+        return nameOntologyWeb;
+    }
+
+    public void alinhar() throws URISyntaxException {
 
         Properties params = new Properties();
 
+        if (selectedIotOntology.equals("Fiesta-IoT")) {
+            System.out.println("fiesta");
+
+            file3 = new URI("file:/home/diangazo/NetBeansProjects/Wiser-Alignment/MyOnto20.owl");
+
+        } else {
+            if (selectedIotOntology.equals("SSN")) {
+                System.out.println("ssn");
+            } else {
+                if (selectedIotOntology.equals("M3-lite")) {
+                    System.out.println("M3-Lite");
+                } else {
+                    System.out.println("nenhum");
+                }
+            }
+        }
+
+        if (selectedWebOntology.equals("Geonames")) {
+            System.out.println("Geonames");
+
+            file2 = new URI("file:/home/diangazo/NetBeansProjects/Wiser-Alignment/wgs84.owl");
+
+        } else {
+            if (selectedWebOntology.equals("DBpedia")) {
+                System.out.println("DBpedia");
+            } else {
+                if (selectedWebOntology.equals("Schema")) {
+                    System.out.println("Schema");
+                } else {
+                    System.out.println("nenhum2");
+                }
+            }
+        }
+
         try {
             //My ontologies
-            URI uri1 = new URI("file:/home/diangazo/NetBeansProjects/Wiser-Alignment/MyOnto20.owl");
-            URI uri2 = new URI("file:/home/diangazo/NetBeansProjects/Wiser-Alignment/wgs84.owl");
+            URI uri1 = file3;
+            URI uri2 = file2;
 
             //Inrialpes Ontology
 //            URI uri1 = new URI("file:myOnto.owl");
@@ -93,22 +163,11 @@ public class MyAlign {
             BasicAlignment A1A2 = (BasicAlignment) (A1.clone());
             A1A2.ingest(A2);
 
-            // Access alignment Cells
-//            Iterator<Cell> iterator = A1.iterator();
-//            while (iterator.hasNext()) {
-//                Cell cell = iterator.next();
-//                String cellStr = cell.toString();
-//                String semantics = cell.getSemantics();
-//                String object1 = cell.getObject1().toString();
-//                String object2 = cell.getObject2().toString();
-//                String relation = cell.getRelation().toString();
-//                String strength = "" + cell.getStrength();
-//            }
-            File file1 = new File("/home/diangazo/NetBeansProjects/Wiser-Alignment/ResultadoAlinhamento1.rdf");
+            File file1 = new File("/home/diangazo/NetBeansProjects/Wiser-Alignment/ResultadoAlinhamento2.rdf");
             file1.delete();
             // Save alignment to file
             Alignment result = (BasicAlignment) ((BasicAlignment) A1).clone();
-            File file = new File("/home/diangazo/NetBeansProjects/Wiser-Alignment/ResultadoAlinhamento1.rdf");
+            File file = new File("/home/diangazo/NetBeansProjects/Wiser-Alignment/ResultadoAlinhamento2.rdf");
             FileOutputStream fop = new FileOutputStream(file);
             //Display it as RDF
             try (PrintWriter writer = new PrintWriter(
@@ -126,8 +185,6 @@ public class MyAlign {
 
         } catch (AlignmentException e) {
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(MyAlign.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (URISyntaxException ex) {
             Logger.getLogger(MyAlign.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -152,4 +209,20 @@ public class MyAlign {
 //        fileInputStream.close();
 //
 //    }
+    //retorno do valor setado
+    public String getSelectedIotOntology() {
+        return selectedIotOntology;
+    }
+
+    public void setSelectedIotOntology(String selectedIotOntology) {
+        this.selectedIotOntology = selectedIotOntology;
+    }
+
+    public String getSelectedWebOntology() {
+        return selectedWebOntology;
+    }
+
+    public void setSelectedWebOntology(String selectedWebOntology) {
+        this.selectedWebOntology = selectedWebOntology;
+    }
 }

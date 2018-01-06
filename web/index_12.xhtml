@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Wiser Alignment</title>
+        <!--<link rel="StyleSheet" type="text/css" href="css/grid.css"></link>-->
+    </h:head>
+    <h:body>
+
+        <!--  **************************************************************************************************************************
+              *                                                 Layout                                                                 *
+              ************************************************************************************************************************** -->
+        <p:layout fullPage="true">
+
+            <!--**************************************************************************************************************************
+               *                                       Resultado de Alinhamento                                                         *
+               ************************************************************************************************************************** -->
+            <p:layoutUnit position="center">
+                <h:form>
+                    <p:commandButton value="Parcial Alignment"  actionListener="#{myAlign.alinhar()}"/>
+                    <h:commandButton value="Full Alignment"  action="#{iotEntity.save()}" disabled="true"/>
+                    <h:commandButton value="Integrate Data"  action="#{iotEntity.save()}" disabled="true"/>
+                    <p:dataTable value="#{alignmentResult.resultPrint}" var="tab" scrollable="true">
+
+                        <p:column headerText="Entidade">
+                            <!--<f:facet name="header">Enti1</f:facet>-->
+                            <h:outputText value="#{tab.entity1}" />
+                        </p:column>
+                        <p:column headerText="Media">
+                            <!--<f:facet name="header">media</f:facet>-->
+                            <h:outputText value="#{tab.measure}" />
+                        </p:column>
+                    </p:dataTable>
+
+                    <h:outputText value="Selected Tutorial : "/>
+                    <h:outputText value="#{iotEntity.selected}"/>
+                    <br/>
+                    <h:outputText value="Selected The Level: "/>
+                    <h:outputText value="#{webOntology.selected}"/>
+
+                </h:form>
+            </p:layoutUnit>
+            <!--  **************************************************************************************************************************
+                  *                                             Cabecalho                                                                  *
+                  ************************************************************************************************************************** -->
+
+            <p:layoutUnit style="text-align: center; font-size: 120%" position="north" size="40"
+                          header="Wiser Alignment Ontology Tool" resizable="true" closable="true" collapsible="true">
+                <!--<h1 style="margin-top: 0px">Wiser Alignment Ontology Tool</h1>-->
+            </p:layoutUnit>
+
+            <!--            <p:layoutUnit position="south" size="100" header="Bottom" resizable="true" closable="true" collapsible="true">
+                            <h:outputText value="South unit content." />
+                        </p:layoutUnit>-->
+
+
+            <!--  **************************************************************************************************************************
+                  *                          Consulta das classes e propriedades da ontologia Fiesta-Iot                                   *
+                  ************************************************************************************************************************** -->
+            <p:layoutUnit style="min-width:270px;" position="west"   size="315" header="Iot Ontology"
+                          resizable="true" closable="true" collapsible="true" effect="drop">
+                <h:form>
+                    <p:outputLabel for="iotOnto" value="Ontology: " />
+                    <p:selectOneMenu id="iotOnto" value="#{iotEntity.selected}" style="width:250px">
+                        <f:selectItem itemLabel="Select Ontology" itemValue="" noSelectionOption="true" />
+                        <f:selectItems value="#{iotEntity.nameOntologyIoT}" />
+                        <f:ajax listener="#{iotEntity.listenerIoT}" render="iotClasses" />
+                        <f:ajax listener="#{iotEntity.listenerIoT}" render="iorPropr" />
+                    </p:selectOneMenu>
+                    <p:outputLabel for="iorPropr" value="Class: " />
+                    <p:selectManyMenu id="iorPropr" value="#{iotEntity.selectedValue}" style="width:250px;"
+                                      showCheckbox="true">
+                        <f:selectItems value="#{iotEntity.result2}" var="cla"
+                                       itemValue="#{cla}" itemLabel="#{cla}" />
+                    </p:selectManyMenu>
+
+                    <p:outputLabel for="iotClasses" value="Property: " />
+                    <p:selectManyMenu id="iotClasses" value="#{iotEntity.selectedValue_pro}" style="width:250px"
+                                      showCheckbox="true">
+                        <f:selectItems value="#{iotEntity.result}" var="pro"
+                                       itemValue="#{pro}" itemLabel="#{pro}" />
+                    </p:selectManyMenu>
+                    <br/>
+
+                    <br />
+                    <h:commandButton value="Generate Vocabulary"  action="#{iotEntity.save()}" />
+                </h:form>
+
+            </p:layoutUnit>
+            <!--**************************************************************************************************************************
+                *                          Consulta das classes e propriedades das ontologias da Web                                     *
+                ************************************************************************************************************************** -->
+            <p:layoutUnit position="east" size="310" header="Web Ontology" resizable="true" closable="true" collapsible="true" effect="drop">
+                <!--<h:outputText value="Right unit content." />-->
+                <h:form>
+                    <p:outputLabel for="webOnt" value="Ontology: " />
+                    <p:selectOneMenu id="webOnt" value="#{webOntology.selected}" style="width:250px">
+                        <f:selectItem itemLabel="Select Ontology" itemValue="" noSelectionOption="true" />
+                        <f:selectItems value="#{webOntology.nameOntologyWeb}" />
+                        <f:ajax listener="#{webOntology.listener}" render="webclass" />
+                        <f:ajax listener="#{webOntology.listener}" render="wevprop" />
+                    </p:selectOneMenu>
+                    <br />
+                    <!--                            Classes da ontologia da Web                           -->
+                    <p:outputLabel for="webclass" value="Class: " />
+                    <p:selectManyMenu id="webclass" value="#{webOntology.nameOntologyWeb}" style="width:280px"
+                                      showCheckbox="true">
+                        <f:selectItems value="#{webOntology.result}" var="cla2"
+                                       itemValue="#{cla2}" itemLabel="#{cla2}" />
+                    </p:selectManyMenu>
+
+                    <!--                            Propriedades da ontologia da Web                           -->
+                    <p:outputLabel for="wevprop" value="Property: " />
+                    <p:selectManyMenu id="wevprop" value="#{webOntology.nameOntologyWeb}" style="width:280px"
+                                      showCheckbox="true">
+                        <f:selectItems value="#{webOntology.result2}" var="propp"
+                                       itemValue="#{propp}" itemLabel="#{propp}" />
+                    </p:selectManyMenu>
+                </h:form>
+            </p:layoutUnit>
+        </p:layout>
+
+        <!--**************************************************************************************************************************
+            *                                       Fim do Layout                                                                    *
+            ************************************************************************************************************************** -->
+
+    </h:body>
+</html>
+

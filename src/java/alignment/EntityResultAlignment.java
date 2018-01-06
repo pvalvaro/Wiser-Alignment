@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.jena.query;
+package alignment;
 
 /**
  *
  * @author diangazo
  */
-public class cont {
+public class EntityResultAlignment {
 
     private String entity1;
     private String entity2;

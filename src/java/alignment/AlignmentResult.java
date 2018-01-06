@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.jena.query;
+package alignment;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -19,19 +19,27 @@ import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
+import org.jena.query.IotEntity;
 
 /**
  *
  * @author diangazo
  */
 @ManagedBean
-public class beanteste {
+public class AlignmentResult {
 
-    List<cont> listas;
-    List<cont> listas2;
+    private IotEntity selectedValue = new IotEntity();
+    private String selectedHere = selectedValue.getSelected();
 
-    public List<cont> getCont() throws FileNotFoundException {
-        InputStream in = new FileInputStream("/home/diangazo/NetBeansProjects/testes/ResultadoAlinhamento1.rdf");
+    List<EntityResultAlignment> listas;
+    List<EntityResultAlignment> listas2;
+
+    public String getValueSelected() {
+        return selectedHere;
+    }
+
+    public List<EntityResultAlignment> getResultPrint() throws FileNotFoundException {
+        InputStream in = new FileInputStream("/home/diangazo/NetBeansProjects/Wiser-Alignment/ResultadoAlinhamento1.rdf");
         Model model = ModelFactory.createDefaultModel();
         model.read(in, null);
         String QueryIn = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
@@ -54,8 +62,8 @@ public class beanteste {
         List<String> lista2 = new ArrayList<>();
         listas = new ArrayList<>();
         while (results.hasNext()) {
-            cont r = new cont();
-            cont rr = new cont();
+            EntityResultAlignment r = new EntityResultAlignment();
+
             QuerySolution m = results.nextSolution();
             lista.add(String.valueOf(m.getResource("predicate")));
             if ((lista.get(a).equals("http://knowledgeweb.semanticweb.org/heterogeneity/alignment#entity1"))
@@ -69,8 +77,8 @@ public class beanteste {
                 }
                 for (int c = 0; c < lista2.size(); c++) {
                     //  System.out.println(lista4.get(c));
-                    for (String retval : lista2.get(c).split(" |#|@|_|\\\\|\\/|\\^|http://www.w3.org/2001/XMLSchema#float|\\*")) {
-                        r.setMeasure(retval);
+                    for (String measure : lista2.get(c).split(" |#|@|_|\\\\|\\/|\\^|http://www.w3.org/2001/XMLSchema#float|\\*")) {
+                        r.setMeasure(measure);
                     }
                 }
             }
