@@ -19,7 +19,6 @@ import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
-import org.jena.query.IotEntity;
 
 /**
  *
@@ -28,17 +27,10 @@ import org.jena.query.IotEntity;
 @ManagedBean
 public class AlignmentResult {
 
-    private IotEntity selectedValue = new IotEntity();
-    private String selectedHere = selectedValue.getSelected();
-
     List<EntityResultAlignment> listas;
-    List<EntityResultAlignment> listas2;
+    // List<EntityResultAlignment> listas2;
 
-    public String getValueSelected() {
-        return selectedHere;
-    }
-
-    public List<EntityResultAlignment> getResultPrint() throws FileNotFoundException {
+    public void ResultPrint(List<String> item) throws FileNotFoundException {
         InputStream in = new FileInputStream("/home/diangazo/NetBeansProjects/Wiser-Alignment/ResultadoAlinhamento1.rdf");
         Model model = ModelFactory.createDefaultModel();
         model.read(in, null);
@@ -87,8 +79,15 @@ public class AlignmentResult {
             a += 1;
         }
         qe.close();
-        return listas;
+//        return listas;
 
     }
 
+    public List getListas() {
+        return listas;
+    }
+
+    public void setListas(List<EntityResultAlignment> listas) {
+        this.listas = listas;
+    }
 }

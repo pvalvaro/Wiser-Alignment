@@ -78,8 +78,13 @@
                                 </p:selectOneMenu>
                                 <br />
 
-                                <h:commandButton value="Parcial Alignment"  action="#{myAlign.alinhar()}" />
-                                <p:dataTable value="#{alignmentResult.resultPrint}" var="tab" scrollable="true">
+                                <h:commandButton value="Align Ontologies"  action="#{myAlign.alinhar()}" />
+                                <p:commandButton value="Result Alignment" icon="ui-icon-search"
+                                                 style="margin:0" action="#{myAlign.ResultPrint(item)}"
+                                                 update="tabela" >
+                                </p:commandButton>
+
+                                <p:dataTable id="tabela" value="#{myAlign.listas}" var="tab" scrollable="true">
 
                                     <p:column headerText="Entity">
                                         <!--<f:facet name="header">Enti1</f:facet>-->
